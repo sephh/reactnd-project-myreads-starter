@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter, Route} from "react-router-dom";
+import * as BooksAPI from './BooksAPI'
 
 import './App.css'
 import BooksList from "./BooksList";
@@ -7,8 +8,28 @@ import SearchBooks from "./SearchBooks";
 
 class BooksApp extends React.Component {
 
-    state = {};
+    state = {
+        books: []
+    };
 
+    updateShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf);
+        this.setState(
+            (state) => ({
+                books: state.books.filter(b => book.id !== b.id)
+                            .concat([{ ...book, shelf }])
+            })
+        );
+    };
+
+    componentDidMount() {
+
+        BooksAPI.getAll()
+            .then(books => {
+                this.setState({books: books});
+            })
+
+    }
 
     render() {
         return (
@@ -16,9 +37,15 @@ class BooksApp extends React.Component {
                 <div className="app">
 
 
-                    <Route exact path='/' component={BooksList}/>
+                    <Route exact path='/' render={() =>
+                            <BooksList books={this.state.books} updateShelf={this.updateShelf
+                        }/>}
+                    />
 
-                    <Route path='/search' component={SearchBooks}/>
+                    <Route path='/search' render={() =>
+                        <SearchBooks updateShelf={this.updateShelf
+                        }/>}
+                    />
 
 
                 </div>

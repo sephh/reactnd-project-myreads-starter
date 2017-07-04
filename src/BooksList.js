@@ -3,27 +3,20 @@
  */
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-// import {PropTypes} from 'prop-types';
-import * as BooksAPI from './BooksAPI'
+import {PropTypes} from 'prop-types';
+import sortBy from 'sort-by';
+
 import BookShelf from "./BookShelf";
 
 
 class BooksList extends Component {
 
-    bookTypes = ['currentlyReading', 'read', 'wantToRead'];
-
-    state = {
-        books: []
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        updateShelf: PropTypes.func.isRequired
     };
 
-    componentDidMount() {
-
-        BooksAPI.getAll()
-            .then(books => {
-                this.setState({books: books});
-            })
-
-    }
+    bookTypes = ['currentlyReading', 'wantToRead', 'read'];
 
     render() {
         return (
@@ -39,8 +32,15 @@ class BooksList extends Component {
 
                         { this.bookTypes
                             .map(type =>
-                                <BookShelf key={type} books={ this.state.books.filter(book => book.shelf === type) }
-                                           title={type}/>
+                                <BookShelf
+                                    key={type}
+                                    books={ this.props.books
+                                        .filter(book => book.shelf === type)
+                                        .sort(sortBy('title'))
+                                    }
+                                    title={type}
+                                    onUpdateShelf={this.props.updateShelf}
+                                />
                             )
                         }
 
