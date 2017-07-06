@@ -7,11 +7,9 @@ Of course, you are free to start this project from scratch if you wish! Just be 
 Clone project from github:
 ```bash
 git clone https://github.com/sephh/reactnd-project-myreads-starter.git
-npm install
-npm start
 ```
 
-Install and build from bash:
+Install and build:
 ```bash
 npm install
 npm start
