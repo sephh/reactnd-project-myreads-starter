@@ -2,6 +2,21 @@ This is the starter template for the final assessment project for Udacity's Reac
 
 Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
 
+### Installation & Build
+
+Clone project from github:
+```bash
+git clone https://github.com/sephh/reactnd-project-myreads-starter.git
+npm install
+npm start
+```
+
+Install and build from bash:
+```bash
+npm install
+npm start
+```
+
 ## Backend Server
 
 To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
