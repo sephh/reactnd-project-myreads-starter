@@ -16,7 +16,11 @@ class BooksList extends Component {
         updateShelf: PropTypes.func.isRequired
     };
 
-    bookTypes = ['currentlyReading', 'wantToRead', 'read'];
+    bookTypes = [
+        {value: 'currentlyReading', label: 'Currently Reading'},
+        {value: 'wantToRead', label: 'Want To Read'},
+        {value: 'read', label: 'Read'}
+    ];
 
     render() {
         return (
@@ -33,12 +37,12 @@ class BooksList extends Component {
                         { this.bookTypes
                             .map(type =>
                                 <BookShelf
-                                    key={type}
+                                    key={type.value}
                                     books={ this.props.books
-                                        .filter(book => book.shelf === type)
+                                        .filter(book => book.shelf === type.value)
                                         .sort(sortBy('title'))
                                     }
-                                    title={type}
+                                    title={type.label}
                                     onUpdateShelf={this.props.updateShelf}
                                 />
                             )

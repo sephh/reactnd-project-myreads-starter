@@ -12,6 +12,12 @@ class BooksApp extends React.Component {
         books: []
     };
 
+    /**
+     * @description Update book shelf value into state books
+     * @param {object} book
+     * @param {string} shelf
+     */
+
     updateShelf = (book, shelf) => {
         BooksAPI.update(book, shelf);
         this.setState(
@@ -43,7 +49,7 @@ class BooksApp extends React.Component {
                     />
 
                     <Route path='/search' render={() =>
-                        <SearchBooks updateShelf={this.updateShelf
+                        <SearchBooks books={this.state.books} updateShelf={this.updateShelf
                         }/>}
                     />
 
